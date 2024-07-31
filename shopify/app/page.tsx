@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image';
 const HomePage = () => {
   return (
    <main>
@@ -18,3 +18,4 @@ const HomePage = () => {
    </main>
   );
 }
+export default HomePage;
