@@ -50,12 +50,12 @@ const LoginForm = () => {
         <Image src="/Products.jpg" alt="" layout="fill" />
       </div>
       <div className="flex items-center justify-center ">
-        <form className=" absolute flex flex-col gap-4 p-6 bg- text-green rounded-lg " onSubmit={handleSubmit(onSubmit)}>
+        <form className=" absolute flex flex-col gap-4 p-6 bg- text-white rounded-lg " onSubmit={handleSubmit(onSubmit)}>
         <h1 className='font-bold text-3xl'>Welcome Back</h1>
           <label htmlFor="email" className="pt-">
             Email
           </label>
-          <div className="input input-bordered flex items-center gap-2">
+          <div className="input input-bordered flex items-center gap-2 text-blue-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -69,14 +69,14 @@ const LoginForm = () => {
               type="email"
               placeholder="Enter your email"
               {...register("email")}
-              className="grow"
+              className="grow text-green"
             />
           </div>
           {errors.email && (
             <div className="text-red-600">{errors.email.message}</div>
           )}
           <label htmlFor="password">Password</label>
-          <div className="input input-bordered flex items-center gap-2">
+          <div className="input input-bordered flex items-center gap-2 text-blue-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -93,7 +93,7 @@ const LoginForm = () => {
               type="password"
               placeholder="Enter your password"
               {...register("password")}
-              className="grow"
+              className="grow text-blue-500"
             />
           </div>
           {errors.password && (
