@@ -9,22 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
+    "@hookform/resolvers": "^3.9.0",
     "firebase": "^10.12.4",
->>>>>>> 4c9d26e2e075fc82e206042a44ca4907914c2827
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-<<<<<<< HEAD
     "daisyui": "^4.12.10",
-=======
->>>>>>> 4c9d26e2e075fc82e206042a44ca4907914c2827
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
