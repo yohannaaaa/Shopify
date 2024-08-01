@@ -2,16 +2,22 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useGenerationStore } from '../sign-up/page';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/firebase/config';
 const Navbar = () => {
    const pathname = usePathname();
     const router = useRouter();
-   const {isLoggedIn} = useGenerationStore();
+   const {isLoggedIn ,setIsLoggedIn} = useGenerationStore();
 
   let isRendered = true;
   if (pathname === '/sign-up'|| pathname ==='/login') {
     isRendered = false;
+  }
+  function handleLogOut() {
+    signOut(auth)
+    setIsLoggedIn(false)
   }
   return (
     <div>
@@ -66,7 +72,7 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
              <button onClick={()=> router.push('/edit-profile')}> <li className="justify-between">Update account detail</li></button>
-              <li><a>Logout</a></li>
+              <li><a onClick={handleLogOut}>Logout</a></li>
               <li><a className='text-red-900 underline'>Delete Account</a></li>
             </ul>
           </div>

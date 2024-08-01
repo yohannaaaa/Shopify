@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { doc, updateDoc } from 'firebase/firestore'
-import { updatePassword, updateProfile, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth'
+import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth'
 import { auth, firestore } from '@/firebase/config'
 
 const formSchema = z.object({
