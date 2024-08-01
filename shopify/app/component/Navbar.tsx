@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="navbar shadow-lg shadow-bottom shadow-gray-500  bg-white z-100">
         <div className="navbar ">
           <div className="flex-1 ">
-            <Link href="/logo">
+            <Link href="/">
              <Image src="/logo.png" width ="100" height="70" alt="logo imported from public directory" /> 
             </Link>
           </div>
