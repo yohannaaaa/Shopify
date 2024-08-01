@@ -3,7 +3,9 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation'; 
 import { useGenerationStore } from '../sign-up/page';
+
 const Navbar = () => {
    const pathname = usePathname();
     const router = useRouter();
