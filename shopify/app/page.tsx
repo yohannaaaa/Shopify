@@ -1,13 +1,43 @@
-import Image from "next/image";
-import Intro from "./(homepage-comp)/Intro";
-import Hero from "./components/Homepage/Hero/Hero";
-export default function Home() {
+
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+
+const LandingPage = () => {
+  const router = useRouter();
 
   return (
-   <div className="flex flex-col">
-   <Intro />
-   <h1 className="text-4xl m-4 text-white font-sans">New Products</h1>
-    <Hero />
-   </div>
+    <div className="flex flex-col min-h-screen bg-gray-100">
+    
+
+      <main className="flex-grow container mx-auto p-4 text-center">
+        <h1 className="text-4xl font-bold mb-4">Welcome to ElectroMart</h1>
+        <p className="text-lg mb-8">Your one-stop shop for the latest in electronic devices.</p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+          <div className="bg-white shadow-lg rounded-lg p-4">
+            <Image src="/Laptop.jpg" alt="Laptop" width={400} height={300} className="rounded-lg mb-4"/>
+            <h2 className="text-xl font-semibold">Laptops</h2>
+            <p className="text-gray-600">Discover the latest laptops from top brands.</p>
+          </div>
+          <div className="bg-white shadow-lg rounded-lg p-4">
+            <Image src="/PantonyPhone.webp" alt="Smartphone" width={400} height={300} className="rounded-lg mb-4"/>
+            <h2 className="text-xl font-semibold">Smartphones</h2>
+            <p className="text-gray-600">Find the perfect smartphone for your needs.</p>
+          </div>
+          <div className="bg-white shadow-lg rounded-lg p-4">
+            <Image src="/Airpod-max.jpg" alt="Headphones" width={400} height={300} className="rounded-lg mb-4"/>
+            <h2 className="text-xl font-semibold">Headphones</h2>
+            <p className="text-gray-600">Experience high-quality sound with our headphones.</p>
+          </div>
+        </div>
+
+        <Link href="/sign-up" className="btn btn-primary">Shop Now</Link>
+      </main>
+    </div>
   );
-}; 
+};
+
+export default LandingPage;

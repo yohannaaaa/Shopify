@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { doc, updateDoc } from 'firebase/firestore'
-import { updatePassword, updateProfile, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth'
+import { updatePassword, reauthenticateWithCredential, EmailAuthProvider } from 'firebase/auth'
 import { auth, firestore } from '@/firebase/config'
+import { useState } from 'react'
 
 const formSchema = z.object({
   Fname: z.string().min(2, 'First name must be at least 2 characters'),
@@ -21,6 +22,8 @@ const formSchema = z.object({
 type FormField = z.infer<typeof formSchema>
 
 const EditProfile = () => {
+ const [isEdited, setisEdited] = useState(false)
+
   const { register, handleSubmit, formState: { errors } } = useForm<FormField>({
     resolver: zodResolver(formSchema)
   });
@@ -31,10 +34,10 @@ const EditProfile = () => {
       await reauthenticateWithCredential(auth.currentUser, credential);
     }
   };
+  const user = auth.currentUser;
 
   const onSubmit = async (data: FormField) => {
     try {
-      const user = auth.currentUser;
 
       if (user) {
         await reauthenticate(user.email!, data.oldPassword);
@@ -43,11 +46,12 @@ const EditProfile = () => {
 
         const userDocRef = doc(firestore, 'users', user.uid);
         await updateDoc(userDocRef, {
-          firstName: data.Fname,
-          lastName: data.Lname
+          Fname: data.Fname,
+          Lname: data.Lname
         });
 
         console.log('Profile updated successfully');
+        setisEdited(true)
       } else {
         console.error('No authenticated user found');
       }
@@ -89,6 +93,9 @@ const EditProfile = () => {
             <button type='submit' className='btn bg-blue-500 outline-none border-none text-white'>Save Changes</button>
           </div>
         </form>
+        {isEdited && <div>
+          User Details edited successfully 
+          </div>}
       </Card>
     </div>
   )

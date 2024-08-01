@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/component/Navbar";
 import { Suspense } from "react";
 import Footer from "./component/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,18 +17,18 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>)
-{
- 
+}>) {
   return (
     <html lang="en">
       <head>
         <title>shopify</title>
       </head>
       <body className={inter.className}>
-       <Navbar />
+        <AuthProvider>
+        <Navbar />
         <Suspense fallback={"Loading..."}>{children}</Suspense>
-        <Footer/>
+        <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

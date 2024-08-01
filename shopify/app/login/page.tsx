@@ -7,8 +7,10 @@ export default function LoginPage(){
     <div className='h-screen w-screen flex justify-center items-center'>
       <div className='shadow-xl p-4 rounded-xl'>
         <LoginForm/>
-          
+           
       </div>
+      
     </div>
+   
   )
 }

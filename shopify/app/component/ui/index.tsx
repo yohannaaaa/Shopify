@@ -1,63 +1,65 @@
-"use client";
+'use client';
+
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { useFirebaseAuth } from "@/firebase/config";
-import { z } from "zod"
+import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useGenerationStore } from "@/app/sign-up/page";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import { useAuth } from "@/context/AuthContext"; 
+import Link from "next/link";
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters long"),
 });
 
 type FormFields = z.infer<typeof schema>;
 
-const LoginForm = () => {
-    const { auth } = useFirebaseAuth();
-    const { setIsLoggedIn } = useGenerationStore()
-    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
-    const router = useRouter();
-    const {
+const LoginForm: React.FC = () => {
+  const router = useRouter();
+  const { logIn } = useAuth();
+
+  const {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     resolver: zodResolver(schema),
   });
+
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const user= await signInWithEmailAndPassword(data.email,data.password);
-      setIsLoggedIn(true)
-      if(!user){
-        console.log("sign in failed")
-        return
+      clearErrors(); 
+      const user = await logIn(data.email, data.password);
+      if (user) {
+        router.push('/');
+      } else {
+        setError("root", {
+          type: "manual",
+          message: "Sign in failed. Please check your credentials.",
+        });
       }
-
-      console.log({user})
-      router.push('/');
     } catch (error) {
-      console.error(error)
+      console.error(error);
       setError("root", {
-        message:"Invalid email or password"
-      })
+        type: "manual",
+        message: "Invalid email or password. Please try again.",
+      });
     }
   };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="fixed inset-0 z-[-1] bg-cover bg-center">
-        <Image src="/Products.jpg" alt="" layout="fill" />
+        <Image src="/Products.jpg" alt="Background Image" layout="fill" />
       </div>
-      <div className="flex items-center justify-center ">
-        <form className=" absolute flex flex-col gap-4 p-6 bg- text-white rounded-lg " onSubmit={handleSubmit(onSubmit)}>
-        <h1 className='font-bold text-3xl'>Welcome Back</h1>
-          <label htmlFor="email" className="pt-">
-            Email
-          </label>
+      <div className="flex items-center justify-center">
+        <form className="absolute flex flex-col gap-4  bg-gray-800 p-10 text-white rounded-lg" onSubmit={handleSubmit(onSubmit)}>
+          <h1 className='font-bold text-3xl'>Welcome Back</h1>
+          <label htmlFor="email">Email</label>
           <div className="input input-bordered flex items-center gap-2 text-blue-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -102,12 +104,15 @@ const LoginForm = () => {
           {errors.password && (
             <div className="text-red-600">{errors.password.message}</div>
           )}
-          <button className="btn btn-outline btn-info ">
+          <button className="btn btn-outline btn-info">
             {isSubmitting ? "Loading..." : "Login"}
           </button>
+          <div>
+            Don't have an account? <Link href='/sign-up' className="text-info italic">Sign Up</Link>
+          </div>
+          {errors.root && <div className="text-red-600">{errors.root.message}</div>}
         </form>
       </div>
-      {errors.root && <div className="text-red-600">{errors.root.message}</div>} 
     </div>
   );
 };
