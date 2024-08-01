@@ -37,18 +37,10 @@ const EditProfile = () => {
       const user = auth.currentUser;
 
       if (user) {
-        // Re-authenticate the user
         await reauthenticate(user.email!, data.oldPassword);
 
-        // Update password
         await updatePassword(user, data.newPassword);
 
-        // Update profile
-        await updateProfile(user, {
-          displayName: `${data.Fname} ${data.Lname}`
-        });
-
-        // Update Firestore document
         const userDocRef = doc(firestore, 'users', user.uid);
         await updateDoc(userDocRef, {
           firstName: data.Fname,

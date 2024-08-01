@@ -3,13 +3,14 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 // import { usePathname } from 'next/navigation';
-
+import {useRouter } from 'next/navigation';
 
 const Navbar = () => {
 //   const pathname = usePathname();
 //   if (pathname === '/sign-up '|| pathname ==='/sign-in') {
 //     return null; 
 //   }
+  const router = useRouter();
   return (
     <div className="navbar shadow-lg shadow-bottom shadow-gray-500  bg-white z-100">
         <div className="navbar ">
@@ -60,7 +61,7 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-             <Link href ='/edit-profile'> <li className="justify-between">Update account detail</li></Link>
+             <button onClick={()=> router.push('/edit-profile')}> <li className="justify-between">Update account detail</li></button>
               <li><a>Logout</a></li>
               <li><a className='text-red-900 underline'>Delete Account</a></li>
             </ul>
