@@ -2,6 +2,7 @@ import Image from "next/image";
 import Intro from "./(homepage-comp)/Intro";
 import Hero from "./components/Homepage/Hero/Hero";
 export default function Home() {
+
   return (
    <main className="flex flex-col">
    <Intro />
