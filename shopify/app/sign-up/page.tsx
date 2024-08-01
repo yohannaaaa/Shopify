@@ -6,8 +6,12 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
+
 import { firestore } from "@/firebase/config";
 import { collection, addDoc } from "@firebase/firestore";
+import { useRouter } from 'next/navigation';
+import { create } from 'zustand'
+
 
 type FormFields = {
   Fname: string;
@@ -36,10 +40,20 @@ async function addDataToFirestore(
     return false;
   }
 }
+interface GenerationState{
+isLoggedIn: boolean
+setIsLoggedIn:(isLoggedIn: boolean) => void
+}
+
+export const useGenerationStore = create<GenerationState>()((set) => ({
+  isLoggedIn : false,
+  setIsLoggedIn: (isLoggedIn:boolean) => set({isLoggedIn})
+}))
 
 const SignUp = () => {
+  const router = useRouter();
   const { register } = useForm<FormFields>();
-
+  const { setIsLoggedIn } = useGenerationStore()
   const [email, setEmail] = useState("");
   const [Fname, setFName] = useState("");
   const [Lname, setLName] = useState("");
@@ -63,6 +77,7 @@ const SignUp = () => {
             setPassword("");
             setFName("");
             setLName("");
+            router.push('/login');
           }
         
       } catch (error) {
@@ -70,6 +85,7 @@ const SignUp = () => {
       }
     };
     
+
 
   return (
     <div className="h-screen w-screen flex justify-center items-center">

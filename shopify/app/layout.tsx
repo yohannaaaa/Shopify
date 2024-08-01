@@ -16,14 +16,16 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>)
+{
+ 
   return (
     <html lang="en">
       <head>
         <title>shopify</title>
       </head>
       <body className={inter.className}>
-        <Navbar />
+       <Navbar />
         <Suspense fallback={"Loading..."}>{children}</Suspense>
         <Footer/>
       </body>

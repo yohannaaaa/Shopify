@@ -5,6 +5,7 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useFirebaseAuth } from "@/firebase/config";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useGenerationStore } from "@/app/sign-up/page";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
@@ -17,6 +18,7 @@ type FormFields = z.infer<typeof schema>;
 
 const LoginForm = () => {
     const { auth } = useFirebaseAuth();
+    const { setIsLoggedIn } = useGenerationStore()
     const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
     const router = useRouter();
     const {
@@ -30,6 +32,7 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       const user= await signInWithEmailAndPassword(data.email,data.password);
+      setIsLoggedIn(true)
       if(!user){
         console.log("sign in failed")
         return
