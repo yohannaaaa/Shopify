@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, useEffect } from "react";
 
 interface CartItem {
   productId: string;
@@ -24,6 +24,18 @@ const CartContext = createContext<CartContextValue | null>(null);
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<{ cartItems: CartItem[] }>({ cartItems: [] });
   const router = useRouter();
+
+  useEffect(() => {
+    setCartToState();
+  }, []);
+
+  const setCartToState = () => {
+    setCart(
+      localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart"))
+        : []
+    );
+  };
 
   const addItemToCart = async ({
     productId,
