@@ -1,7 +1,5 @@
 'use client'
-import React from 'react'
 import Card from '../components/card'
-import products from '../../public/Products.jpg'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,7 +22,6 @@ const EditProfile = () => {
     resolver: zodResolver(formSchema)
   })
 
-  const onSubmit = async (data: FormField) => {
     const onSubmit = async (data: FormField) => {
       try {
         const auth = getAuth()
@@ -50,30 +47,31 @@ const EditProfile = () => {
       } catch (error) {
         console.error('Error updating profile:', error)
       }
-    }  }
+    }  
 
   return (
-    <div className="flex items-center justify-center mt-14 mb-5 bg-cover bg-center bg-no-repeat text-gray-800" style={{ backgroundImage: `url(${products})` }}>
-      <Card>
+    <>
+<div className="flex items-center justify-center mt-14 mb-5 text-gray-500 min-h-screen">
+        <Card>
         <h1 className='text-blue-400 font-semibold'>Edit your profile details</h1>
         <form onSubmit={handleSubmit(onSubmit)} className='p-3 grid grid-cols-2 gap-5 justify-around'>
           <div>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>First Name</label>
+            <label className='block text-gray-500 text-sm font-bold mb-2'>First Name</label>
             <input {...register('Fname')} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300' type='text' />
             {errors.Fname && <div className='text-red-400 text-xs'>{errors.Fname.message}</div>}
           </div>
           <div>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>Last Name</label>
+            <label className='block text-gray-500 text-sm font-bold mb-2'>Last Name</label>
             <input {...register('Lname')} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300' type='text' />
             {errors.Lname && <div className='text-red-400 text-xs'>{errors.Lname.message}</div>}
           </div>
           <div className='col-span-2'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>Email</label>
+            <label className='block text-gray-500 text-sm font-bold mb-2'>Email</label>
             <input {...register('email')} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300' type='email' />
             {errors.email && <div className='text-red-400 text-xs'>{errors.email.message}</div>}
           </div>
           <div className='col-span-2'>
-            <label className='block text-gray-700 text-sm font-bold mb-2'>Password Changes</label>
+            <label className='block text-gray-500 text-sm font-bold mb-2'>Password Changes</label>
             <input {...register('oldPassword')} className='shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300 placeholder:text-sm' type='password' placeholder='Current Password' />
             {errors.oldPassword && <div className='text-red-400 text-xs'>{errors.oldPassword.message}</div>}
           </div>
@@ -92,6 +90,7 @@ const EditProfile = () => {
         </form>
       </Card>
     </div>
+    </>
   )
 }
 
