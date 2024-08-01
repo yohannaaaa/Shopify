@@ -73,7 +73,7 @@ const Navbar = () => {
           </div>
         </div>
         :
-        <div className='border w-15 h-10  border-gray-100 rounded-md hover:bg-gray-300 hover:h-8  text-blue-700  bg-gray-100 '>
+        <div className='border w-15 h-10  border-gray-100 rounded-md hover:bg-gray-300 hover:h-11 hover:w-18 bg-gray-100 '>
           <Link className='p-4' href="/sign-up"> Sign Up</Link>
           {/* <Link  href="/login"> Log In</Link> */}
         </div>

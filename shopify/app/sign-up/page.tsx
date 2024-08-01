@@ -45,7 +45,7 @@ const SignUp = () => {
       setIsLoggedIn(true)
       setEmail("");
       setPassword("");
-      router.push('./');
+      router.push('/');
     } catch (e) {
       console.error(e);
     }
