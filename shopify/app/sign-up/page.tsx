@@ -6,6 +6,8 @@ import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import {useForm} from "react-hook-form"
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
+import { create } from 'zustand'
 
 type FormFields ={
   name: string;
@@ -13,11 +15,21 @@ type FormFields ={
   password: string;
 
 }
+interface GenerationState{
+isLoggedIn: boolean
+setIsLoggedIn:(isLoggedIn: boolean) => void
+}
+
+export const useGenerationStore = create<GenerationState>()((set) => ({
+  isLoggedIn : false,
+  setIsLoggedIn: (isLoggedIn:boolean) => set({isLoggedIn})
+}))
 
 
 const SignUp = () => {
+  const router = useRouter();
   const { register } = useForm<FormFields>();
-
+  const { setIsLoggedIn } = useGenerationStore()
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -30,8 +42,10 @@ const SignUp = () => {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
       sessionStorage.setItem("user", "true");
+      setIsLoggedIn(true)
       setEmail("");
       setPassword("");
+      router.push('./');
     } catch (e) {
       console.error(e);
     }
