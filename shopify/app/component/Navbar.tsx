@@ -1,11 +1,17 @@
+"use client";
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
+// import { usePathname } from 'next/navigation';
 
 
 const Navbar = () => {
+//   const pathname = usePathname();
+//   if (pathname === '/sign-up '|| pathname ==='/sign-in') {
+//     return null; 
+//   }
   return (
-    <div className="navbar shadow-lg shadow-bottom shadow-gray-500  bg-white">
+    <div className="navbar shadow-lg shadow-bottom shadow-gray-500  bg-white z-100">
         <div className="navbar ">
           <div className="flex-1 ">
             <Link href="/logo">
