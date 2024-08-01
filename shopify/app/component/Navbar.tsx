@@ -60,7 +60,7 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a className="justify-between">Update account detail</a></li>
+             <Link href ='/edit-profile'> <li className="justify-between">Update account detail</li></Link>
               <li><a>Logout</a></li>
               <li><a className='text-red-900 underline'>Delete Account</a></li>
             </ul>
