@@ -2,22 +2,28 @@
 import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
-// import { usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { useGenerationStore } from '../sign-up/page';
 
 
 const Navbar = () => {
-//   const pathname = usePathname();
-//   if (pathname === '/sign-up '|| pathname ==='/sign-in') {
-//     return null; 
-//   }
+   const pathname = usePathname();
+   const {isLoggedIn} = useGenerationStore();
+
+  let isRendered = true;
+  if (pathname === '/sign-up'|| pathname ==='/login') {
+    isRendered = false;
+  }
   return (
-    <div className="navbar shadow-lg shadow-bottom shadow-gray-500  bg-white z-100">
+    <div>
+    {isRendered && <div className="navbar shadow-lg shadow-bottom shadow-gray-300  bg-white ">
         <div className="navbar ">
           <div className="flex-1 ">
             <Link href="/">
              <Image src="/logo.png" width ="100" height="70" alt="logo imported from public directory" /> 
             </Link>
           </div>
+          {isLoggedIn ? 
           <div className="flex-none">
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -66,7 +72,15 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
+        :
+        <div className='border w-15 h-10  border-gray-100 rounded-md hover:bg-gray-300 hover:h-11 hover:w-18 bg-gray-100 '>
+          <Link className='p-4' href="/sign-up"> Sign Up</Link>
+          <Link  href="/login"> Log In</Link>
+        </div>
+        
+        }
       </div>
+    </div>}
     </div>
   )
 }
