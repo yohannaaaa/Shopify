@@ -1,8 +1,8 @@
 import React, { Children } from 'react'
 import { CartProvider } from '@/context/CartContext'
 
-function GlobalProvider({Children}) {
-  return (<CartProvider>{Children}</CartProvider>
+function GlobalProvider({children}: {children : React.ReactNode}) {
+  return (<CartProvider>{children}</CartProvider>
   )
 }
 

@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
       clearErrors(); 
       const user = await logIn(data.email, data.password);
       if (user) {
-        router.push('/');
+        router.push('/products');
       } else {
         setError("root", {
           type: "manual",

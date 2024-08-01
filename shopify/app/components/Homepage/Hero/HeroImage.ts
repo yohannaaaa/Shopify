@@ -3,20 +3,20 @@ import { title } from "process"
 
 const HeroImage = [
     {
-id: 1,
+        id: 1,
         title: 'Round Mini Portable Bluetooth Speaker',
         src: '/RoundMini.webp',
         price: "85.00",
         description : "Experience powerful sound in a compact, portable package with the Round Mini Portable Bluetooth Speaker. This sleek and stylish speaker delivers impressive audio quality from its high-performance audio drivers, ensuring you can enjoy your music, podcasts, and more wherever you go."
     },{
-id:2,
+        id:2,
         title: 'OVE Light Space 5G',
         src: '/OveLight.webp',
         price: "70.00",
         description : "The OVE Light Space 5G is a versatile and stylish smart phone lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum"
 
     },{
-id:3,
+        id:3,
         title: 'SDK Portable Bluetooth Speaker',
         src: '/SDKportable.webp',
         price: "85.00",

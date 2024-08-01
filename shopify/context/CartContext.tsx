@@ -23,19 +23,21 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<{ cartItems: CartItem[] }>({ cartItems: [] });
+
+const setCartToState = () => {
+  setCart(
+    localStorage.getItem("cart")
+      ? JSON.parse(localStorage.getItem("cart"))
+      : []
+  );
+};
   const router = useRouter();
 
   useEffect(() => {
     setCartToState();
   }, []);
 
-  const setCartToState = () => {
-    setCart(
-      localStorage.getItem("cart")
-        ? JSON.parse(localStorage.getItem("cart"))
-        : []
-    );
-  };
+  
 
   const addItemToCart = async ({
     productId,
@@ -73,12 +75,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     setCartToState();
   };
 
-  const setCartToState = () => {
-    const cartData = localStorage.getItem("cart");
-    if (cartData) {
-      setCart(JSON.parse(cartData));
-    }
-  };
+  
 
   return (
     <CartContext.Provider

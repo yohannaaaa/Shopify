@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 const Hero = () => {
   const router = useRouter()
   function handleSubmit(index:number){
-router.push(`/products/${index}`)
+router.push(`/products/${index + 1}`)
   }
   return (
     <div className='grid grid-cols-5 gap-4 overflow-x-hidden mb-5'>

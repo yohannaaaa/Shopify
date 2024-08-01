@@ -25,7 +25,7 @@ export default function RootLayout({
         <title>shopify</title>
       </head>
       <body className={inter.className}>
-        <GlobalProvider>
+        <GlobalProvider >
         <AuthProvider>
         <Navbar />
         <Suspense fallback={"Loading..."}>{children}</Suspense>
