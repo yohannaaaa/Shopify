@@ -5,7 +5,7 @@ import CardWithText from '../../CardWithText'
 
 const Hero = () => {
   return (
-    <div className='grid grid-cols-5 gap-4 overflow-x-hidden'>
+    <div className='grid grid-cols-5 gap-4 overflow-x-hidden mb-5'>
      {HeroImage.map((image, index)=>(
         <CardWithText {...image} key={index}
         

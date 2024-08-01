@@ -53,7 +53,7 @@ const EditProfile = () => {
     }  }
 
   return (
-    <div className="flex items-center justify-center mt-14 bg-cover bg-center bg-no-repeat text-gray-800" style={{ backgroundImage: `url(${products})` }}>
+    <div className="flex items-center justify-center mt-14 mb-5 bg-cover bg-center bg-no-repeat text-gray-800" style={{ backgroundImage: `url(${products})` }}>
       <Card>
         <h1 className='text-blue-400 font-semibold'>Edit your profile details</h1>
         <form onSubmit={handleSubmit(onSubmit)} className='p-3 grid grid-cols-2 gap-5 justify-around'>
