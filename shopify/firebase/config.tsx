@@ -27,6 +27,7 @@ export const useFirebaseAuth = () => {
   const getFirebaseAuth = getAuth(getFirebaseApp(firebaseConfig));
   return { auth: getFirebaseAuth };
 };
-
+export const auth = getAuth(getFirebaseApp(firebaseConfig));
+export const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(getFirebaseApp(firebaseConfig));
 export const storage = getStorage(getFirebaseApp(firebaseConfig));

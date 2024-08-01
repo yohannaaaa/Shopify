@@ -4,10 +4,9 @@ import React from 'react'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation';
 import { useGenerationStore } from '../sign-up/page';
-
-
 const Navbar = () => {
    const pathname = usePathname();
+    const router = useRouter();
    const {isLoggedIn} = useGenerationStore();
 
   let isRendered = true;
@@ -66,7 +65,7 @@ const Navbar = () => {
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-              <li><a className="justify-between">Update account detail</a></li>
+             <button onClick={()=> router.push('/edit-profile')}> <li className="justify-between">Update account detail</li></button>
               <li><a>Logout</a></li>
               <li><a className='text-red-900 underline'>Delete Account</a></li>
             </ul>
