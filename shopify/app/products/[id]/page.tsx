@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useContext } from 'react';
 import Image from 'next/image';
-import HeroImage from '@/app/components/Homepage/Hero/HeroImage';
+import HeroImage from '@/app/components/layout/Hero/HeroImage';
 import CartContext from '@/context/CartContext';
 import { useRouter } from 'next/navigation';
 

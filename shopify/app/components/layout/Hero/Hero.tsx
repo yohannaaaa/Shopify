@@ -1,7 +1,7 @@
 'use client';
 import React from 'react'
 import HeroImage from './HeroImage'
-import CardWithText from '../../CardWithText'
+import CardWithText from '../CardWithText'
 import { useRouter } from 'next/navigation';
 
 const Hero = () => {
