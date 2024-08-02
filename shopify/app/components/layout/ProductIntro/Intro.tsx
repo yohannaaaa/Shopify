@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Intro() {
   return (
-    <section>
-    <div className=" h-screen relative">
+    <section className =" ">
+    <div className="h-screen relative">
     <Image src = '/Homepage.webp' alt="" fill  />
     </div>
     <div className="absolute top-1/2 left-1/4 transform -translate-x-1/3 -translate-y-1/2 text-white text-center">

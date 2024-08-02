@@ -62,7 +62,7 @@ const Navbar = () => {
   return (
     <div>
       {isRendered && (
-        <div className="navbar shadow-lg shadow-bottom shadow-gray-300 bg-white">
+        <div className="navbar shadow-lg shadow-bottom shadow-gray-300 bg-white mb-5">
           <div className="flex-1">
             {currentUser ? (
               <Link href="/products">
