@@ -1,10 +1,9 @@
-import React from 'react'
-import { AuthProvider } from "firebase/auth";
-function AuthProvider({children}: {children : React.ReactNode}) {
-    return (<AuthProvider children={children}>
+import { AuthProvider } from "@/context/AuthContext";
+function Auth_Provider({children}: {children : React.ReactNode}) {
+    return (<AuthProvider>
         {children}
         </AuthProvider>
     )
   }
   
-  export default AuthProvider
+  export default Auth_Provider
