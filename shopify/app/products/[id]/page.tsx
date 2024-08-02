@@ -35,9 +35,9 @@ const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
           </div>
 
           <div className="flex flex-col p-4 bg-white shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold py-5">{product.title}</h2>
-            <p className="mt-2 text-lg pb-5">{product.price}</p>
-            <p className="my-4">{product.description}</p>
+            <h2 className="text-xl text-body font-semibold py-5">{product.title}</h2>
+            <p className="mt-2 text-lg text-body pb-5">{product.price}</p>
+            <p className="my-4 text-body">{product.description}</p>
 
             <h1>Quantity</h1>
             <div className="flex items-center mt-4 pb-5">
