@@ -1,6 +1,7 @@
 'use client';
 import { createContext, useState, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from './AuthContext'
 
 interface CartItem {
   productId: string;

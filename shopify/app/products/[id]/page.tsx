@@ -32,11 +32,11 @@ const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-screen relative">
       {product ? (
         <div key={id} className="grid grid-cols-2 h-full items-center">
           
-          <div className="relative col-span-1 h-full z-10">
+          <div className="relative col-span-1 h-screen z-10">
             <Image src={product.src} alt={product.title} layout="fill" className='object-cover '/>
           </div>
 
