@@ -32,16 +32,11 @@ const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
         <div key={id} className="grid grid-cols-2 h-full items-center">
           
           <div className="relative col-span-1 h-full z-10">
-          <h2 className="text-xl text-body font-semibold py-5">{product.title}</h2>
             <Image src={product.src} alt={product.title} layout="fill" className='object-cover '/>
           </div>
-          <div className="col-span-1 flex flex-col justify-center p-4">
-    <h2 className="text-xl font-semibold py-5">{product.title}</h2>
-    {/* Additional text content can go here */}
-  </div>
 
           <div className="flex flex-col p-4 ">
-            
+            <h2 className="text-xl text-body font-semibold py-5">{product.title}</h2>
             <p className="mt-2 text-lg text-body pb-5">{product.price}</p>
             <p className="my-4 text-body">{product.description}</p>
 
