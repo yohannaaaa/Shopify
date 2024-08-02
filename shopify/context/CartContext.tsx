@@ -9,7 +9,6 @@ interface CartItem {
   quantity: number;
   price: string; 
 }
-
 export type { CartItem };
 
 interface CartProviderProps {
@@ -19,7 +18,7 @@ interface CartProviderProps {
 interface CartContextValue {
   cart: { cartItems: CartItem[] };
   addItemToCart: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
-  updateItemQuantity: (productId: string, quantity: number) => void;
+  updateItemQuantity: (id: string, quantity: number) => void;
   deleteItemFromCart: (id: string) => void;
 }
 
@@ -61,9 +60,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     updateCartInLocalStorage({ cartItems: existingCartItems });
   };
 
-  const updateItemQuantity = (productId: string, quantity: number) => {
+  const updateItemQuantity = (id: string, quantity: number) => {
     const existingCartItems = [...cart.cartItems];
-    const itemIndex = existingCartItems.findIndex(i => i.productId === productId);
+    const itemIndex = existingCartItems.findIndex(i => i.productId === id);
 
     if (itemIndex > -1) {
       existingCartItems[itemIndex].quantity = quantity;

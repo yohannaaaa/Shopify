@@ -14,12 +14,11 @@ const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { logOut, userInfo } = useAuth();
-  const { cart } = useContext(CartContext);  // Use CartContext to get the cart state
+  const { cart } = useContext(CartContext);  
 
   const isRendered = pathname !== '/sign-up' && pathname !== '/login';
   const currentUser = auth.currentUser;
 
-  // Calculate total quantity of items in the cart
   const totalQuantity = cart?.cartItems?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
   const handleDelete = async () => {

@@ -148,7 +148,7 @@ const Cart = () => {
                   </a>
 
                   <Link
-                    href="/"
+                    href="/products"
                     className="px-4 py-3 inline-block text-lg w-full text-center font-medium text-green-600 bg-white shadow-sm border border-gray-200 rounded-md hover:bg-gray-100"
                   >
                     Back to shop
@@ -162,7 +162,7 @@ const Cart = () => {
         <section className="py-10">
           <div className="container max-w-screen-xl mx-auto px-4 text-center">
             <h2 className="text-2xl font-semibold mb-4">Your Cart is Empty</h2>
-            <Link href="/" className="px-4 py-3 inline-block text-lg text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
+            <Link href="/products" className="px-4 py-3 inline-block text-lg text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700">
               Back to Shop
             </Link>
           </div>
