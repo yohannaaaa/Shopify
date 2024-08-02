@@ -1,7 +1,28 @@
 'use client';
 import React, { useContext } from 'react';
-import CartContext, { CartItem } from '@/context/CartContext';
+import CartContext, { CartItem }  from '@/context/CartContext';
 import Link from 'next/link';
+ 
+const SuccessMessage = () => {
+  return (
+    <div role="alert" className="alert alert-success">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6 shrink-0 stroke-current"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span>Your purchase has been confirmed!</span>
+    </div>
+  );
+}; 
 
 const Cart = () => {
   const context = useContext(CartContext);
@@ -23,11 +44,15 @@ const Cart = () => {
       updateItemQuantity(cartItem.productId, newQty);
     }
   };
-  const handleCheckout = (cartItem: CartItem) =>{
-    deleteItemFromCart(cartItem);
-    cartItems.length = 0;
+  const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
 
-  }
+  const handleCheckout = (cartItem: CartItem) => {
+    cartItem.quantity = 0
+    cart.cartItems =  [];
+    setShowSuccessMessage(true);
+  };
+
+ 
 
   const totalAmount = cart?.cartItems?.reduce((acc, item) => {
     const itemPrice = parseFloat(item.price);
@@ -50,7 +75,7 @@ const Cart = () => {
           </h2>
         </div>
       </section>
-
+      {showSuccessMessage && <SuccessMessage />}
       {cart?.cartItems?.length > 0 ? (
         <section className="py-10">
           <div className="container max-w-screen-xl mx-auto px-4">
@@ -173,6 +198,7 @@ const Cart = () => {
           </div>
         </section>
       )}
+      
     </>
   );
 };
