@@ -1,21 +1,26 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useContext } from 'react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { EmailAuthProvider, reauthenticateWithCredential, deleteUser } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { auth, firestore } from '@/firebase/config';
+import CartContext from '@/context/CartContext';  // Import the CartContext
 
 const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { logOut, userInfo } = useAuth();
+  const { cart } = useContext(CartContext);  // Use CartContext to get the cart state
 
   const isRendered = pathname !== '/sign-up' && pathname !== '/login';
   const currentUser = auth.currentUser;
+
+  // Calculate total quantity of items in the cart
+  const totalQuantity = cart?.cartItems?.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
   const handleDelete = async () => {
     try {
@@ -60,9 +65,15 @@ const Navbar = () => {
       {isRendered && (
         <div className="navbar shadow-lg shadow-bottom shadow-gray-300 bg-white">
           <div className="flex-1">
-            <Link href="/">
-              <Image src="/logo.png" width={100} height={70} alt="logo" />
-            </Link>
+            {currentUser ? (
+              <Link href="/products">
+                <Image src="/logo.png" width={100} height={70} alt="logo" />
+              </Link>
+            ) : (
+              <Link href="/">
+                <Image src="/logo.png" width={100} height={70} alt="logo" />
+              </Link>
+            )}
           </div>
           {currentUser ? (
             <div className="flex-none">
@@ -83,7 +94,7 @@ const Navbar = () => {
                         d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                       />
                     </svg>
-                    <span className="badge badge-sm indicator-item">8</span>
+                    <span className="badge badge-sm indicator-item">{totalQuantity}</span>
                   </div>
                   <div className='right-0'>{userInfo?.firstName || 'User'}</div>
                 </div>
@@ -92,9 +103,9 @@ const Navbar = () => {
                   className="card card-compact dropdown-content bg-base-200 z-[1] mt-3 w-52 shadow"
                 >
                   <div className="card-body">
-                    <span className="text-lg font-bold">8</span>
+                    <span className="text-lg font-bold">{totalQuantity}</span>
                     <div className="card-actions">
-                      <button className="btn btn-primary btn-block">View cart</button>
+                      <button className="btn btn-primary btn-block" onClick={() => router.push('/cart')}>View cart</button>
                     </div>
                   </div>
                 </div>
@@ -147,4 +158,5 @@ const Navbar = () => {
     </div>
   );
 }
-export default Navbar
+
+export default Navbar;

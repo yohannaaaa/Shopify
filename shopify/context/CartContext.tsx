@@ -1,13 +1,16 @@
 'use client';
-import { useRouter } from "next/navigation";
-import { createContext, useState, ReactNode, useEffect } from "react";
+import { createContext, useState, ReactNode, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface CartItem {
   productId: string;
   productName: string;
   image: string;
   quantity: number;
+  price: string; 
 }
+
+export type { CartItem };
 
 interface CartProviderProps {
   children: ReactNode;
@@ -16,6 +19,7 @@ interface CartProviderProps {
 interface CartContextValue {
   cart: { cartItems: CartItem[] };
   addItemToCart: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => void;
+  updateItemQuantity: (productId: string, quantity: number) => void;
   deleteItemFromCart: (id: string) => void;
 }
 
@@ -23,65 +27,61 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [cart, setCart] = useState<{ cartItems: CartItem[] }>({ cartItems: [] });
-
-const setCartToState = () => {
-  setCart(
-    localStorage.getItem("cart")
-      ? JSON.parse(localStorage.getItem("cart"))
-      : []
-  );
-};
   const router = useRouter();
 
   useEffect(() => {
-    setCartToState();
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
   }, []);
 
-  
+  const updateCartInLocalStorage = (updatedCart: { cartItems: CartItem[] }) => {
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCart(updatedCart);
+  };
 
-  const addItemToCart = async ({
+  const addItemToCart = ({
     productId,
     productName,
     image,
     quantity = 1,
+    price, 
   }: Omit<CartItem, 'quantity'> & { quantity?: number }) => {
-    const item: CartItem = {
-      productId,
-      productName,
-      image,
-      quantity,
-    };
+    const item: CartItem = { productId, productName, image, quantity, price };
+    const existingCartItems = [...cart.cartItems];
+    const itemIndex = existingCartItems.findIndex(i => i.productId === item.productId);
 
-    const isItemExist = cart?.cartItems?.find((i) => i.productId === item.productId);
-
-    let newCartItems: CartItem[];
-
-    if (isItemExist) {
-      newCartItems = cart?.cartItems?.map((i) =>
-        i.productId === isItemExist.productId ? item : i
-      );
+    if (itemIndex > -1) {
+      existingCartItems[itemIndex].quantity += quantity;
     } else {
-      newCartItems = [...(cart?.cartItems || []), item];
+      existingCartItems.push(item);
     }
 
-    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
-    setCartToState();
+    updateCartInLocalStorage({ cartItems: existingCartItems });
+  };
+
+  const updateItemQuantity = (productId: string, quantity: number) => {
+    const existingCartItems = [...cart.cartItems];
+    const itemIndex = existingCartItems.findIndex(i => i.productId === productId);
+
+    if (itemIndex > -1) {
+      existingCartItems[itemIndex].quantity = quantity;
+      updateCartInLocalStorage({ cartItems: existingCartItems });
+    }
   };
 
   const deleteItemFromCart = (id: string) => {
-    const newCartItems = cart?.cartItems?.filter((i) => i.productId !== id);
-
-    localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
-    setCartToState();
+    const updatedCartItems = cart.cartItems.filter(i => i.productId !== id);
+    updateCartInLocalStorage({ cartItems: updatedCartItems });
   };
-
-  
 
   return (
     <CartContext.Provider
       value={{
         cart,
         addItemToCart,
+        updateItemQuantity,
         deleteItemFromCart,
       }}
     >
