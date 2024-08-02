@@ -11,7 +11,7 @@ export default function Input({ title, error, ...rest }: Props) {
       <Label title={title} />
       <input
         {...rest}
-        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300"
+        className="input input-bordered flex items-center gap-2 text-blue-700"
         type="text"
       />
       {error && <div className="text-red-400 text-xs">{error}</div>}

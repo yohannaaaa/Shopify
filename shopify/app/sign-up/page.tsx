@@ -9,6 +9,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { firestore } from "@/firebase/config";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import Input from "../components/ui/Input";
 
 const schema = z.object({
   Fname: z.string().min(1, "First name is required"),
@@ -69,16 +70,14 @@ const SignUp: React.FC = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <h1 className="text-white text-2xl mb-5">Sign Up</h1>
-            <label htmlFor="Fname">First Name</label>
-            <input
+            <Input
               {...register("Fname")}
+              title="First Name"
               type="text"
               placeholder="First name"
-              className="input input-bordered flex items-center gap-2 text-blue-600"
+              error={errors.Fname?.message}
             />
-            {errors.Fname && (
-              <div className="text-red-600">{errors.Fname.message}</div>
-            )}
+            
             <label htmlFor="Lname">Last Name</label>
             <input
               {...register("Lname")}
