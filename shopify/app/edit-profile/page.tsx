@@ -1,5 +1,5 @@
 'use client'
-import Card from '../components/card'
+import Card from '../components/layout/card'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'

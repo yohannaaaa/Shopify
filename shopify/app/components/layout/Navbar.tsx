@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { EmailAuthProvider, reauthenticateWithCredential, deleteUser } from 'firebase/auth';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { auth, firestore } from '@/firebase/config';
-import CartContext from '@/context/CartContext';  // Import the CartContext
+import CartContext from '@/context/CartContext';  
 
 const Navbar = () => {
   const pathname = usePathname();
