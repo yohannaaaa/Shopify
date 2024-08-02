@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import { CartProvider } from '@/context/CartContext'
 
 function GlobalProvider({children}: {children : React.ReactNode}) {

@@ -21,7 +21,7 @@ type FormFields = z.infer<typeof schema>;
 
 const SignUp: React.FC = () => {
   const router = useRouter();
-  const { signUp, currentUser } = useAuth();  
+  const { signUp } = useAuth();  
 
   const {
     register,
@@ -46,7 +46,6 @@ const SignUp: React.FC = () => {
         Fname: data.Fname,
         Lname: data.Lname,
         email: data.email,
-        password: data.password,
       });
 
       router.push("/login");

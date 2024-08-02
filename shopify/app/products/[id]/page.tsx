@@ -1,12 +1,17 @@
 'use client';
 import React, { useState, useContext } from 'react';
 import Image from 'next/image';
-import HeroImage from '@/app/components/Homepage/Hero/HeroImage';
+import HeroImage from '@/app/components/layout/Hero/HeroImage';
 import CartContext from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
   const context = useContext(CartContext);
   const addItemToCart = context?.addItemToCart;
+  const router = useRouter();
+  function handleSubmit(){
+   router.push('/cart')
+  }
 
   const product = HeroImage.find((image) => image.id === parseInt(id, 10));
 
@@ -30,14 +35,15 @@ const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
     <div className="h-screen">
       {product ? (
         <div key={id} className="grid grid-cols-2 h-full items-center">
-          <div className="relative w-3/4 h-1/2 m-5 ml-12">
-            <Image src={product.src} alt={product.title} layout="fill" objectFit="cover" />
+          
+          <div className="relative col-span-1 h-full z-10">
+            <Image src={product.src} alt={product.title} layout="fill" className='object-cover '/>
           </div>
 
-          <div className="flex flex-col p-4 bg-white shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold py-5">{product.title}</h2>
-            <p className="mt-2 text-lg pb-5">{product.price}</p>
-            <p className="my-4">{product.description}</p>
+          <div className="flex flex-col p-4 ">
+            <h2 className="text-xl text-body font-semibold py-5">{product.title}</h2>
+            <p className="mt-2 text-lg text-body pb-5">{product.price}</p>
+            <p className="my-4 text-body">{product.description}</p>
 
             <h1>Quantity</h1>
             <div className="flex items-center mt-4 pb-5">
@@ -63,11 +69,13 @@ const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
               >
                 Add to Cart
               </button>
-              <button
-                className="primary px-4 py-2 bg-slate-950 text-white rounded-3xl btn-wide"
-              >
-                Buy Now
-              </button>
+              <div onClick={() => handleSubmit()}>
+                <button
+                  className="primary px-4 py-2 bg-slate-950 text-white rounded-3xl btn-wide"
+                >
+                  Buy Now
+                </button>
+              </div>
             </div>
           </div>
         </div>

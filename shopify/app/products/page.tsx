@@ -1,7 +1,7 @@
 'use client';
 import Image from "next/image";
-import Intro from "../components/(homepage-comp)/Intro";
-import Hero from "../components/Homepage/Hero/Hero";
+import Intro from "../components/layout/ProductIntro/Intro";
+import Hero from "../components/layout/Hero/Hero";
 export default function Products() {
  
   return (
