@@ -77,7 +77,7 @@ const Navbar = () => {
           {currentUser ? (
             <div className="flex-none">
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle  ">
                   <div className="indicator">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -95,13 +95,13 @@ const Navbar = () => {
                     </svg>
                     <span className="badge badge-sm indicator-item">{totalQuantity}</span>
                   </div>
-                  <div className='right-0'>{userInfo?.firstName || 'User'}</div>
+                  
                 </div>
                 <div
                   tabIndex={0}
                   className="card card-compact dropdown-content bg-base-200 z-[1] mt-3 w-52 shadow"
                 >
-                  <div className="card-body">
+                  <div className="card-body pl-5">
                     <span className="text-lg font-bold">{totalQuantity}</span>
                     <div className="card-actions">
                       <button className="btn btn-primary btn-block" onClick={() => router.push('/cart')}>View cart</button>
@@ -109,8 +109,10 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-              <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+
+              
+              <div className="dropdown dropdown-end mr-[-10] ml-5 pt-3">
+                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar ">
                   <div className="w-10 rounded-full">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +129,8 @@ const Navbar = () => {
                       />
                     </svg>
                   </div>
-                </div>
+                 </div>
+                
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
@@ -144,12 +147,12 @@ const Navbar = () => {
                     <a className='text-red-900 underline' onClick={handleDelete}>Delete Account</a>
                   </li>
                 </ul>
-              </div>
+              </div><div className='right-0 text-sm mr-10'>{userInfo?.firstName || 'User'}</div>
             </div>
           ) : (
-            <div className='border w-15 h-10 border-gray-100 rounded-md hover:bg-gray-300 hover:h-11 hover:w-18 bg-gray-100'>
-              <Link className='p-4' href="/sign-up">Sign Up</Link>
-              <Link href="/login">Log In</Link>
+            <div className=''>
+              <Link className='border w-20 pl-2 pt-1 h-10 mr-5 text-blue-400 border-slate-300 rounded-md hover:bg-blue-900 hover:text-white hover:h-11 hover:w-18 bg-gray-100' href="/sign-up">Sign Up</Link>
+              {/* <Link className='border w-20 pl-2 pt-1 h-10 mr-5 text-blue-400 border-slate-300 rounded-md hover:bg-blue-900  hover:text-white hover:h-11 hover:w-18 bg-gray-100' href="/login">Log In</Link> */}
             </div>
           )}
         </div>

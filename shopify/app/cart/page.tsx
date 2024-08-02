@@ -38,7 +38,7 @@ const Cart = () => {
 
   return (
     <>
-      <section className="py-5 sm:py-7 bg-blue-100">
+      <section className="py-5 sm:py-7 text-blue-700 bg-slate-900">
         <div className="container max-w-screen-xl mx-auto px-4">
           <h2 className="text-3xl font-semibold mb-2">
             {cart?.cartItems?.length || 0} Item(s) in Cart
@@ -62,7 +62,7 @@ const Cart = () => {
                                 <img src={cartItem.image} alt={cartItem.productName} />
                               </div>
                             </div>
-                            <figcaption className="ml-3">
+                            <figcaption className="ml-3 text-blue-900">
                               <p>
                                 <a href="#" className="hover:text-blue-600">
                                   {cartItem.productName}
@@ -95,7 +95,7 @@ const Cart = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="leading-5">
+                          <div className="leading-5 text-slate-600">
                             <p className="font-semibold not-italic">
                               ${(parseFloat(cartItem.price) * (cartItem.quantity || 0)).toFixed(2)}
                             </p>
