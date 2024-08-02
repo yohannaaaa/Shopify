@@ -3,10 +3,15 @@ import React, { useState, useContext } from 'react';
 import Image from 'next/image';
 import HeroImage from '@/app/components/Homepage/Hero/HeroImage';
 import CartContext from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
   const context = useContext(CartContext);
   const addItemToCart = context?.addItemToCart;
+  const router = useRouter();
+  function handleSubmit(){
+   router.push('/cart')
+  }
 
   const product = HeroImage.find((image) => image.id === parseInt(id, 10));
 
@@ -64,11 +69,13 @@ const ProductDetails = ({ params: { id } }: { params: { id: string } }) => {
               >
                 Add to Cart
               </button>
-              <button
-                className="primary px-4 py-2 bg-slate-950 text-white rounded-3xl btn-wide"
-              >
-                Buy Now
-              </button>
+              <div onClick={() => handleSubmit()}>
+                <button
+                  className="primary px-4 py-2 bg-slate-950 text-white rounded-3xl btn-wide"
+                >
+                  Buy Now
+                </button>
+              </div>
             </div>
           </div>
         </div>
