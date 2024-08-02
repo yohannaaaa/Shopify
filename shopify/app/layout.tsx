@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/app/components/layout/Navbar";
 import { Suspense } from "react";
 import Footer from "./components/layout/Footer";
-import { AuthProvider } from "@/context/AuthContext";
+import Auth_Provider  from "../../providers/AuthProvider";
 import GlobalProvider from "../../providers/GlobalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,13 +25,14 @@ export default function RootLayout({
         <title>shopify</title>
       </head>
       <body className={inter.className}>
+      <Auth_Provider>
         <GlobalProvider>
-          <AuthProvider>
             <Navbar />
             <Suspense fallback={"Loading..."}>{children}</Suspense>
             <Footer />
-          </AuthProvider>
         </GlobalProvider>
+        </Auth_Provider>
+
       </body>
     </html>
   );

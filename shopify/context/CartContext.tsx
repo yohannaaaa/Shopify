@@ -1,7 +1,7 @@
 'use client';
 import { createContext, useState, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from './AuthContext'
+import { useAuth } from '@/context/AuthContext'
 
 interface CartItem {
   productId: string;
@@ -26,18 +26,23 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue | null>(null);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
-  const [cart, setCart] = useState<{ cartItems: CartItem[] }>({ cartItems: [] });
   const router = useRouter();
 
+  const { currentUser } = useAuth(); // Access the current user's UID
+  const [cart, setCart] = useState<{ cartItems: CartItem[] }>({ cartItems: [] });
+  const userId = currentUser?.uid; // Get the current user's UID
+  const storageKey = `cart_${userId}`;
+
   useEffect(() => {
-    const storedCart = localStorage.getItem('cart');
+    
+    const storedCart = localStorage.getItem(storageKey);
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
-  }, []);
+  }, [currentUser]);
 
   const updateCartInLocalStorage = (updatedCart: { cartItems: CartItem[] }) => {
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    localStorage.setItem(storageKey, JSON.stringify(updatedCart));
     setCart(updatedCart);
   };
 
