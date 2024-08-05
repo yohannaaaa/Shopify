@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { useContext, useState }from 'react';
 import CartContext, { CartItem }  from '@/context/CartContext';
 import Link from 'next/link';
  
@@ -44,7 +44,7 @@ const Cart = () => {
       updateItemQuantity(cartItem.productId, newQty);
     }
   };
-  const [showSuccessMessage, setShowSuccessMessage] = React.useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleCheckout = (cartItem: CartItem) => {
     cartItem.quantity = 0

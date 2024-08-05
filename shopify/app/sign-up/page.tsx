@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore"; 
 import { firestore } from "@/firebase/config";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
         throw new Error("User is not authenticated");
       }
 
-      const userRef = doc(firestore, 'users', user.uid);
+      const userRef = doc(firestore, 'users', user.uid); 
       await setDoc(userRef, {
         Fname: data.Fname,
         Lname: data.Lname,
@@ -75,39 +75,32 @@ const SignUp: React.FC = () => {
               title="First Name"
               type="text"
               placeholder="First name"
-              error={errors.Fname?.message}
+              error={errors?.Fname?.message}
             />
-            
-            <label htmlFor="Lname">Last Name</label>
-            <input
-              {...register("Lname")}
+            <Input
+              {...register("Fname")}
+              title="Last Name"
               type="text"
               placeholder="Last name"
-              className="input input-bordered flex items-center gap-2 text-blue-600"
+              error={errors?.Lname?.message}
             />
-            {errors.Lname && (
-              <div className="text-red-600">{errors.Lname.message}</div>
-            )}
-            <label htmlFor="email">Email</label>
-            <input
+            
+            <Input
               {...register("email")}
-              type="email"
+              title="Email"
+              type="text"
               placeholder="Email"
-              className="input input-bordered flex items-center gap-2 text-blue-600"
+              error={errors?.email?.message}
             />
-            {errors.email && (
-              <div className="text-red-600">{errors.email.message}</div>
-            )}
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
+
+            <Input
               {...register("password")}
-              placeholder="Password"
-              className="input input-bordered flex items-center gap-2 text-blue-600"
+              title="Password"
+              type="text"
+              placeholder="Pasword"
+              error={errors.password?.message}
             />
-            {errors.password && (
-              <div className="text-red-600">{errors.password.message}</div>
-            )}
+            
             <button
               type="submit"
               className="w-full p-3 bg-indigo-600 rounded text-white hover:bg-indigo-500"
