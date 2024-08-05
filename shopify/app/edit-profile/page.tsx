@@ -104,32 +104,21 @@ const EditProfile = () => {
             placeholder="Old password"
           />
 
-          <div className="col-span-2">
-            <input
-              {...register("newPassword")}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300 placeholder:text-sm"
-              type="password"
-              placeholder="New Password"
-            />
-            {errors.newPassword && (
-              <div className="text-red-400 text-xs">
-                {errors.newPassword.message}
-              </div>
-            )}
-          </div>
-          <div className="col-span-2">
-            <input
-              {...register("confirmPassword")}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray bg-gray-300 placeholder:text-sm"
-              type="password"
-              placeholder="Confirm New Password"
-            />
-            {errors.confirmPassword && (
-              <div className="text-red-400 text-xs">
-                {errors.confirmPassword.message}
-              </div>
-            )}
-          </div>
+        <Input
+            title="New Password"
+            error={errors?.newPassword?.message}
+            {...register("newPassword")}
+            type="password"
+            placeholder="New password"
+          />
+
+          <Input
+            title="Current Password"
+            error={errors?.confirmPassword?.message}
+            {...register("confirmPassword")}
+            type="password"
+            placeholder="Confirm New password"
+          />
           <div className="col-start-2">
             <button type="button" className="text-gray-500 mr-10">
               Cancel

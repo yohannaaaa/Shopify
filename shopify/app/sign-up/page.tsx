@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { doc, setDoc } from "firebase/firestore"; 
 import { firestore } from "@/firebase/config";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import Input from "../components/ui/Input";
 
